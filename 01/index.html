@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- ============== 輪播css ============== -->
+  <link rel="stylesheet" href="https://media.etmall.com.tw/sp/12500/swiper.min.css" />
+  <!-- ============== 共用css ============== -->
+  <link rel="stylesheet" href="https://media.etmall.com.tw/sp/12500/animate.min.css" />
+  <link rel="stylesheet" href="https://media.etmall.com.tw/sp/12500/generate_v1.5.7.css"/>
+  <link rel="stylesheet" href="https://media.etmall.com.tw/sp/12500/build.css" />
+    
+  <!-- [電梯步驟1] 電梯CSS 不用就關掉 -->
+  <!-- 商品左電梯CSS，要使用還要在步驟2開啟左電梯data資料 -->
+  <!-- <link id="localElevatorLeft" rel="stylesheet" href="sp-elevator-left.css"> -->
+
+  <!-- 商品右電梯CSS，步驟2有測試div可以測試 -->
+  <link id="localElevatorRight" rel="stylesheet" href="sp-elevator-right.css" />
+  <!-- [電梯步驟1] 電梯CSS END -->
+
+  <style>
+
+    body {
+      background-color: #e4e3e7;
+      /* width: 100vw; */
+    }
+
+    body:before {
+      background: url(bg-m.jpg) center 0 no-repeat;
+      background-size: 100%;
+      /* width: 100vw; */
+    }
+
+    @media screen and (min-width: 960px) {
+      body:before {
+        background: url(bg.jpg) center 0 no-repeat;
+        background-size: auto;
+      }
+    }
+    
+    /* 調整logo位置大小 */
+    .logo{  
+      top: 0vw;
+      left: 1vw;
+      width: 25%;
+    }
+
+    /* 調整大網logo */
+    @media screen and (min-width:960px){
+      .logo{  
+        top: 0px;
+        left: calc(50% - 480px);
+        width: 30%;
+        max-width: 220px; 
+      }
+    }
+
+    /* 動畫小物件 */
+    /*-- 手機版：設定物件距離左邊與上邊的位置，單位可以使用"%"或"vw";width:建議電腦版可以使用auto，手機版則可使用%調整 --*/
+    
+    .animate__obj--01 {
+      position: fixed;
+      top: 0vw;
+      left: 0vw;
+      width: 0%;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .animate__obj--02 {
+      position: fixed;
+      top: 0vw;
+      left: 0vw;
+      width: 0%;
+      z-index: 1;
+      pointer-events: none;
+      animation: rotation 5s infinite linear;
+
+    }
+    .animate__obj--03 {
+      position: fixed;
+      top: 0vw;
+      left: 0vw;
+      width: 0%;
+      z-index: 1;
+    }
+    .animate__obj--04 {
+      position: absolute;
+      top: 63vw;
+      left: 13vw;
+      width: 45%;
+      z-index: 1;
+      animation: flicker-4 3s linear infinite both;
+    }
+    .animate__obj--05 {
+      position: absolute;
+      top: 56vw;
+      left: 43vw;
+      width: 43%;
+      z-index: 1;
+      pointer-events: none;
+      animation: flicker-4 3s linear infinite both;
+      /* animation-fill-mode: both; */
+    }
+    .animate__obj--06 {
+      position: fixed;
+      top: 0vw;
+      left: 0vw;
+      width: 0%;
+      z-index: 1;
+      pointer-events: none;
+
+    }
+
+    @keyframes rotation {
+      from {
+          transform: rotate(0deg);
+      }
+      to {
+          transform: rotate(359deg);
+      }
+    }
+
+    @keyframes flicker-4 {
+      0%,
+      100% {
+        opacity: 1;
+      }
+      31.98% {
+        opacity: 1;
+      }
+      32% {
+        opacity: 0;
+      }
+      32.8% {
+        opacity: 0;
+        transform: skew(0deg, 0deg);
+      }
+      32.82% {
+        opacity: 1;
+        transform: skew(20deg, 0deg);
+      }
+      34.98% {
+        opacity: 1;
+        transform: skew(0deg, 0deg);
+      }
+      35% {
+        opacity: 0;
+      }
+      35.7% {
+        opacity: 0;
+      }
+      35.72% {
+        opacity: 1;
+      }
+      36.98% {
+        opacity: 1;
+      }
+      37% {
+        opacity: 0;
+      }
+      37.6% {
+        opacity: 0;
+      }
+      37.62% {
+        opacity: 1;
+      }
+      67.98% {
+        opacity: 1;
+        transform: skew(0deg, 0deg);
+      }
+      68% {
+        opacity: 0;
+        transform: skew(20deg, 0deg);
+      }
+      68.4% {
+        opacity: 0;
+        transform: skew(0deg, 0deg);
+      }
+      68.42% {
+        opacity: 1;
+      }
+      95.98% {
+        opacity: 1;
+      }
+      96% {
+        opacity: 0;
+      }
+      96.7% {
+        opacity: 0;
+        transform: skew(0deg, 0deg);
+      }
+      96.72% {
+        opacity: 1;
+        transform: skew(20deg, 0deg);
+      }
+      98.98% {
+        opacity: 0;
+        transform: skew(0deg, 0deg);
+      }
+      99% {
+        opacity: 0;
+      }
+      99.6% {
+        opacity: 0;
+      }
+      99.62% {
+        opacity: 1;
+      }
+    }
+    /*-- 電腦版：設定物件距離左邊與上邊的位置，單位可以使用"px"，左邊可以挑整clac()後面的px值;width:建議電腦版可以使用auto，手機版則可使用%調整 --*/
+    @media screen and (min-width:960px) {
+      .animate__obj--01 {
+        top: 490px;
+        left: calc(50% - 1011px);
+        width: auto;
+      }
+      .animate__obj--02 {
+        top: 161px;
+        left: calc(50% - -571px);
+        width: auto;
+      }
+      .animate__obj--03 {
+        top: 212px;
+        left: calc(50% - -513px);
+        width: auto;
+      }
+      .animate__obj--04 {
+        top: 600px;
+        left: calc(50% - 355px);
+        width: auto;
+      }
+      .animate__obj--05 {
+        top: 540px;
+        left: calc(50% - 64px);
+        width: auto;
+      }
+      .animate__obj--05 {
+        top: 540px;
+        left: calc(50% - 64px);
+        width: auto;
+      }
+      .animate__obj--06 {
+        top: 650px;
+        left: calc(50% - -548px);
+        width: auto;
+      }
+
+
+    }
+  
+    /* --- 背景動畫調整 --- */
+
+    .bg__container .bg--first {
+      /* 1會在主視覺的上層 */
+      /* z-index: 1;  */
+    }
+
+    .bg__container .bg--second {
+      /* 1會在主視覺的上層 */
+      /* z-index: 1; */
+    }
+
+    .bg__container .bg--third {
+      /* 1會在主視覺的上層 */
+      /* z-index: 1;  */
+    }
+
+
+    @media screen and (min-width: 1213px){
+      .sp-right__nav a{
+        /* 大網右電梯文字顏色 */
+        color: #613312;
+      }
+      .sp-right__nav li a.active, .sp-right__nav a:hover{
+        /* 大網右電梯文字hover顏色 */
+        color: #ff8a29;
+      }
+      .sp-right__nav li a.active:after, .sp-right__nav a:hover:after{
+        /* 大網右電梯TITLE圈圈的hover顏色 */
+
+        border: 3px solid #ff8a29;
+      }
+      .sp-right__nav li::before {
+        background-color: #613312;
+      }   
+    }
+    /* --- 電梯換色 end--- */
+
+    /* --- 背景動畫圖片們--- */
+
+    .bg__container.falling .bg--first {
+      background: url(bg-animate-1.png) center 0;
+    }
+
+    .bg__container.falling .bg--second {
+      background: url(bg-animate-2.png) center 0;
+    }
+
+    .bg__container.falling .bg--third {
+      background: url(bg-animate-3.png) center 0;
+    }
+
+    .bg__container.falling-center .bg--first {
+      background: url(bg-animate-1.png) center 0;
+    }
+
+    .bg__container.rain .bg--first,
+    .bg__container.rain .bg--second {
+      background-image: url(bg-rain.png);
+    }
+
+    .bg__container.snow .falling__block {
+      background-image: url(bg-snow.png);
+    }
+
+    .random__layer .falling-random-image {
+      background: url(falling-random-image.png) center 0 no-repeat;
+      background-size: 100%;
+    }
+
+
+  </style>
+
+</head>
+
+  <body class="bg-fixed">
+
+    <div class="navRightBar" id="navRightBar"></div>
+    <div class="elevatorHome js--main--dialog" id="elevatorHome"></div>
+    <div id="barHome"></div>
+    <div class="home--icon layout--main" id="iconHome"></div>
+
+    <div class="sp__wrap" id="spWrap">
+
+      <!-- logo -->
+      <div class="logo">
+        <a href="https://www.etmall.com.tw/">
+          <img src="ehs-logo.png" alt="東森購物">
+        </a>
+      </div>
+
+      <!-- ====== 背景飄落 start ====== -->
+      <div class="bg__container falling">
+        <!-- ====== 背景動畫 == ==== -->
+        <div class="falling__layer">
+          <div class="falling__block bg--first"></div>
+          <!-- <div class="falling__block bg--second"></div> -->
+          <!-- <div class="falling__block bg--third"></div> -->
+        </div>
+
+        <!-- ====== 圖片隨機動畫 == ==== -->
+        <div class="random__layer">
+          <div class="random__block"></div>
+        </div>
+      </div>
+      <!-- ====== 背景飄落 end ====== -->
+
+      <!-- 動畫小物件 -->
+      <div class="animate__obj--01 animate__animated">
+        <img src="ani-1.gif" alt="">
+      </div>
+      <div class="animate__obj--02 animate__animated">
+        <img src="ani-2.png" alt="">
+      </div>
+      <div class="animate__obj--03 animate__animated">
+        <img src="ani-3.png" alt="">
+      </div>
+      <div class="animate__obj--04 animate__animated">
+        <img src="pd-1.png" alt="">
+      </div>
+      <div class="animate__obj--05 animate__animated">
+        <img src="pd-2.png" alt="">
+      </div>
+      <div class="animate__obj--06 animate__animated">
+        <img src="ani-4.gif" alt="">
+      </div>
+
+      <!-- 版頭主視覺 -->
+      <main class="sp__main" >
+        <section class="sp__visual">
+          <div class="layout--main">
+            <ul class="visual--auto clearfix">
+              <!-- 版頭 -->
+              <li class="visual__fragment width--auto">
+                <img src="index_01.png" alt="品牌運動限量超殺 熱門款式 狂降6折" title="品牌運動限量超殺 熱門款式 狂降6折">
+              </li>
+              <li class="visual__fragment width--auto">
+                <img src="index_02.png" alt="" title="">
+              </li>
+
+              <!-- 回饋 -->
+              <li class="visual__fragment width--auto">
+                <a href="#"><img src="index_03.png" alt="最高回饋" title="最高回饋"></a>
+              </li>
+              <li class="visual__fragment width--auto">
+                <a href="#"><img src="index_04.png" alt="" title=""></a>
+              </li>
+              <li class="visual__fragment width--auto">
+                <a href="#"><img src="index_05.png" alt="" title=""></a>
+              </li>
+              <li class="visual__fragment width--auto">
+                <a href="#"><img src="index_06.png" alt="下單抽好禮" title="下單抽好禮"></a>
+              </li>
+
+            </ul>
+          </div>
+
+        </section>
+
+      </main>
+    </div>
+
+
+  <!-- ============== 共用JS ============== -->
+  <script src="https://media.etmall.com.tw/sp/12500/jquery-3.6.0.min.js"></script>
+  <script src="https://media.etmall.com.tw/sp/12500/swiper.min.js"></script>
+  <script src="https://media.etmall.com.tw/sp/12500/generate_v1.5.7.js"></script>
+  <!--[電梯步驟2] 電梯 JS -->
+  <!-- 商品左電梯單機版資料，不用就關掉，要使用還要上方步驟1開啟商品左電梯CSS -->
+  <!-- <script id="dataElevatorLeft" src="data-elevator.js"></script> -->
+
+  <!-- 線上自動切換電梯，無論如何都要有 -->
+  <script id="checkElevator" src="https://media.etmall.com.tw/sp/11911/check-elevator.js"></script>
+  <!-- [電梯步驟2] 電梯 JS END -->
+
+  <!-- [測試區] -->
+  <!-- 測試商品右電梯用，上線前必須關掉 -->
+  <!-- <div data-title="ccc"></div> -->
+
+
+  <!-- 測試霸道電梯用，開啟時上方自動切換電梯要關閉，這支正式上線時需關閉、上方的要開啟回來 -->
+  <!-- <script id="checkElevator" src="https://media.etmall.com.tw/sp/14841/test-elevator.js?87"></script> -->
+
+  <!-- ============== 滾動動畫 start ============== -->
+  <script src="wow.min.js"></script>
+
+  <script>
+    new WOW().init();
+  </script>
+  <!-- ============== 滾動動畫 end ============== -->
+    
+  </body>
+</html>
+
+
+<!-- <link rel="stylesheet" href="https://media.etmall.com.tw/sp/12500/animate.min.css" /> -->
+<!-- <link rel="stylesheet" href="https://media.etmall.com.tw/sp/12500/generate_v1.5.7.css"/> -->
+
+<section class="sp__visual">
+  <div class="layout--main">
+    <ul class="visual--auto clearfix">
+      <!-- 誘因 -->
+      <li class="visual__fragment width--auto">
+        <a href="#"><img src="index_07.png" alt="下單抽GIAT纖塑褲" title="下單抽GIAT纖塑褲"></a>
+      </li>
+      <li class="visual__fragment width--auto">
+        <a href="#"><img src="index_08.png" alt="滿$1,212登記抽樂透金$122" title="滿$1,212登記抽樂透金$122"></a>
+      </li>
+      <li class="visual__fragment width--auto">
+        <a href="#"><img src="index_09.png" alt="滿$2,212登記抽樂透金$1212" title="滿$2,212登記抽樂透金$1212"></a>
+      </li>
+    </ul>
+  </div>
+</section>
+
+
+<!-- <link rel="stylesheet" href="https://media.etmall.com.tw/sp/12500/animate.min.css" /> -->
+<!-- <link rel="stylesheet" href="https://media.etmall.com.tw/sp/12500/generate_v1.5.7.css"/> -->
+
+<section class="sp__visual">
+  <div class="layout--main">
+    <ul class="visual--auto clearfix">
+      <!-- 主活動 -->
+      <li class="visual__fragment width--auto">
+        <img src="index_10.png" alt="強勢大牌來襲" title="強勢大牌來襲">
+      </li>
+      <li class="visual__fragment width--auto">
+        <a href="https://www.etmall.com.tw/c3/45875"><img src="index_11.png" alt="NIKE" title="NIKE"></a>
+      </li>
+      <li class="visual__fragment width--auto">
+        <a href="https://www.etmall.com.tw/c3/45879"><img src="index_12.png" alt="SKECHERS" title="SKECHERS"></a>
+      </li>
+      <li class="visual__fragment width--auto">
+        <a href="https://www.etmall.com.tw/c3/45874"><img src="index_13.png" alt="New Balance" title="New Balance"></a>
+      </li>
+      <li class="visual__fragment width--auto">
+        <a href="https://www.etmall.com.tw/c3/45859"><img src="index_14.png" alt="Adidas" title="Adidas"></a>
+      </li>
+      <li class="visual__fragment width--auto">
+        <a href="https://www.etmall.com.tw/c3/45869"><img src="index_15.png" alt="G.P" title="G.P"></a>
+      </li>
+      <li class="visual__fragment width--auto">
+        <a href="https://www.etmall.com.tw/c3/62673"><img src="index_16.png" alt="PUMA" title="PUMA"></a>
+      </li>
+    </ul>
+  </div>
+</section>
+
+
